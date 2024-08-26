@@ -125,7 +125,23 @@ def main():
     sales_column = get_last_five_entries_sales()
     stock_data = calculate_stock_data(sales_column)
     update_worksheet(stock_data, "stock")
+    return stock_data
         
 print("Welcome to Love Sandwiches Data Automation")    
-main()    
+stock_data = main()    
 
+# Write you code below this comment
+def get_stock_values(data):
+    """
+    Generates a dict that shows the stock values alongside the relevant sandwich name. 
+    """
+    headings = SHEET.worksheet("stock").get_all_values()[0]
+    
+    dict = {key: data for key, data in zip(headings, data)}
+    
+    print("Make the following numbers of sandwiches for next market:\n")
+        
+    return dict  
+    
+stock_values = get_stock_values(stock_data)
+print(stock_values)
